@@ -101,7 +101,7 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(cell: IconTextTableCell.self, indexPath: indexPath)
         cell.selectionStyle = .none
         let repo = repositories[indexPath.row]
-        cell.render(title: repo.name, subTitle: repo.fullname, icon: nil, iconUrl: repo.owner.avatarUrl)
+        cell.render(title: repo.name, subtitle: repo.fullname, icon: nil, iconUrl: repo.owner.avatarUrl)
         return cell
     }
     
@@ -119,8 +119,7 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
         if repositories.isEmpty { return UIView(frame: .zero) }
         let header = tableView.dequeueReusableHeaderFooter(type: BasicTableHeaderView.self)
         header.title = "Repository in section."
-        header.subTitle = "These repositories belong to section."
-        header.style = .boldTitle
+        header.subtitle = "These repositories belong to section."
         return header
     }
     

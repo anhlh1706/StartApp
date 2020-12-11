@@ -211,13 +211,13 @@
 			path = BaseView;
 			sourceTree = "<group>";
 		};
-		E679F29324D2835E0099105D /* APIClient */ = {
+		E679F29324D2835E0099105D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				E679F29424D283730099105D /* APIClient.swift */,
 				E6693DBC24DBB06B002928B0 /* APIRouter.swift */,
 			);
-			path = APIClient;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		E679F29824D284550099105D /* ViewControllers */ = {
@@ -290,7 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				E62BEBC424D3AE88009DF6BA /* Model */,
-				E679F29324D2835E0099105D /* APIClient */,
+				E679F29324D2835E0099105D /* Networking */,
 				E6F5FBD024D17B1200B857C7 /* Common */,
 				E6F5FBE624D184C900B857C7 /* Resources */,
 				E679F29824D284550099105D /* ViewControllers */,

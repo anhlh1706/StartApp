@@ -17,30 +17,40 @@ final class IconTextTableCell: UITableViewCell {
     private(set) var iconImageView = UIImageView()
     private(set) var labelStack = UIStackView()
     
-    private(set) var title: String? {
-        didSet {
-            titleLabel.text = title
+    var title: String? {
+        get {
+            return titleLabel.text
+        }
+        set {
+            titleLabel.text = newValue
         }
     }
     
-    private(set) var subTitle: String? {
-        didSet {
-            subtitleLabel.text = subTitle
+    var subtitle: String? {
+        get {
+            return subtitleLabel.text
+        }
+        set {
+            subtitleLabel.text = newValue
         }
     }
     
-    private(set) var iconImage: UIImage? {
-        didSet {
-            iconImageView.image = iconImage
-            iconImageView.tintColor = .white
+    var iconImage: UIImage? {
+        get {
+            return iconImageView.image
+        }
+        set {
+            if iconSize == .zero {
+                iconSize = CGSize(width: 40, height: 40)
+            }
+            iconImageView.image = newValue
         }
     }
     
     private var iconSizeAnchor: ConstraintPair!
     
-    var iconSize: CGSize! {
+    var iconSize: CGSize = .zero {
         didSet {
-            guard iconSize != nil else { return }
             removeConstraint(iconSizeAnchor.first)
             removeConstraint(iconSizeAnchor.second)
             iconSizeAnchor.first.constant = iconSize.width
@@ -54,9 +64,9 @@ final class IconTextTableCell: UITableViewCell {
         }
     }
     
-    func render(title: String, subTitle: String? = nil, icon: UIImage? = nil, iconUrl: String? = nil) {
+    func render(title: String, subtitle: String? = nil, icon: UIImage? = nil, iconUrl: String? = nil) {
         self.title = title
-        self.subTitle = subTitle
+        self.subtitle = subtitle
         self.iconImage = icon
         if let iconUrl = iconUrl {
             iconImageView.sd_setImage(with: URL(string: iconUrl), placeholderImage: icon, completed: { (image, _, _, _) in
@@ -67,12 +77,11 @@ final class IconTextTableCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         
         addSubview(iconImageView)
-        iconSizeAnchor = (iconImageView.sizeAnchors == CGSize(width: 40, height: 40))
+        iconSizeAnchor = (iconImageView.sizeAnchors == CGSize(width: 0, height: 0))
         iconImageView.verticalAnchors >= verticalAnchors + 8
-        iconImageView.leadingAnchor == leadingAnchor + 15
+        iconImageView.leadingAnchor == leadingAnchor + 16
         iconImageView.centerYAnchor == centerYAnchor
         
         addSubview(labelStack)
@@ -81,14 +90,14 @@ final class IconTextTableCell: UITableViewCell {
         }
         
         labelStack.axis = .vertical
-        labelStack.spacing = 7
+        labelStack.spacing = 3
         
-        labelStack.leadingAnchor == iconImageView.trailingAnchor + 15
+        labelStack.leadingAnchor == iconImageView.trailingAnchor + 10
         labelStack.topAnchor == topAnchor + 10
         labelStack.bottomAnchor <= bottomAnchor - 8
         labelStack.trailingAnchor == trailingAnchor - 20
         
-        accessoryType = .disclosureIndicator
+//        accessoryType = .disclosureIndicator
         
         iconImageView.contentMode = .scaleAspectFit
         

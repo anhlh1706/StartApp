@@ -9,10 +9,6 @@
 import Foundation
 import UIKit.UIScreen
 
-enum TextStyle {
-    case normal, largeTitle, mediumTitle, boldTitle
-}
-
 enum Screen {
     static let width = UIScreen.main.bounds.width
     static let height = UIScreen.main.bounds.height

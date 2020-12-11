@@ -17,23 +17,22 @@ class BasicTableHeaderView: UITableViewHeaderFooterView {
     fileprivate var stackEdgeAnchors: ConstraintGroup!
     
     var title: String? {
-        didSet {
-            titleLabel.text = title
+        get {
+            return titleLabel.text
+        }
+        set {
+            titleLabel.text = newValue
         }
     }
     
-    var subTitle: String? {
-        didSet {
-            subtitleLabel.text = subTitle
+    var subtitle: String? {
+        get {
+            return subtitleLabel.text
+        }
+        set {
+            subtitleLabel.text = newValue
         }
     }
-    
-    var style: TextStyle = .normal {
-        didSet {
-            updateStyle()
-        }
-    }
-    
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -51,8 +50,9 @@ class BasicTableHeaderView: UITableViewHeaderFooterView {
         
         titleLabel.textColor = .text
         subtitleLabel.textColor = .subtext
+        titleLabel.font = .systemFont(ofSize: 17)
+        subtitleLabel.font = .systemFont(ofSize: 14)
         contentView.backgroundColor = UIColor.background.withAlphaComponent(0.95)
-        updateStyle()
     }
     
     required init?(coder: NSCoder) {
@@ -63,22 +63,6 @@ class BasicTableHeaderView: UITableViewHeaderFooterView {
         backgroundView?.alpha = 0
     }
     
-    private func updateStyle() {
-        switch style {
-        case .normal:
-            titleLabel.font = .systemFont(ofSize: 14)
-            subtitleLabel.font = .systemFont(ofSize: 12)
-        case .largeTitle:
-            titleLabel.font = .systemFont(ofSize: 17)
-            subtitleLabel.font = .systemFont(ofSize: 12)
-        case .mediumTitle:
-            titleLabel.font = .systemFont(ofSize: 17, weight: .medium)
-            subtitleLabel.font = .systemFont(ofSize: 12)
-        case .boldTitle:
-            titleLabel.font = .boldSystemFont(ofSize: 17)
-            subtitleLabel.font = .systemFont(ofSize: 12)
-        }
-    }
 }
 
 final class ActionTableHeaderView: BasicTableHeaderView {

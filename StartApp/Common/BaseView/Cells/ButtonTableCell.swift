@@ -23,6 +23,7 @@ class ButtonTableCell: UITableViewCell {
         button = Button()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
+        separatorInset = UIEdgeInsets(top: 0, left: 1000, bottom: 0, right: 0)
     }
     
     func setTitle(_ title: String?, for state: UIButton.State = .normal, color: UIColor? = nil) {
@@ -79,9 +80,9 @@ final class TextButtonTableCell: ButtonTableCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         button = Button()
-        addSubview(button)
-        button.centerAnchors == centerAnchors
-        button.verticalAnchors == verticalAnchors + 8
+        contentView.addSubview(button)
+        button.centerAnchors == contentView.centerAnchors
+        button.verticalAnchors == contentView.verticalAnchors + 8
         setSizeMode(.edge(height: 50))
     }
     
