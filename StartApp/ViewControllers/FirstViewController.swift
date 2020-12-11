@@ -10,7 +10,7 @@ import UIKit
 import Anchorage
 import SwiftyJSON
 
-final class FirstViewController: UIViewController {
+final class FirstViewController: ViewController {
 
     let tableView = UITableView(frame: .zero, style: .plain)
     
@@ -29,31 +29,17 @@ final class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configView()
+        
     }
 
-}
-
-// MARK: - Private funcs
-private extension FirstViewController {
-    
-    func configView() {
-        setupView()
-        
-        title = "Repository search"
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.searchController = searchController
-        
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.delegate = self
-        
-        nextButton.setTitle("new view", for: .normal)
-    }
-
-    func setupView() {
+    override func setupView() {
         view.addSubview(tableView)
         tableView.edgeAnchors == view.edgeAnchors
+        
+        view.addSubview(nextButton)
+        nextButton.topAnchor == view.topAnchor + 50
+        nextButton.horizontalAnchors == view.horizontalAnchors + 100
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(cell: IconTextTableCell.self)
@@ -62,12 +48,21 @@ private extension FirstViewController {
         tableView.tableFooterView = UIView()
         tableView.keyboardDismissMode = .onDrag
         
-        view.addSubview(nextButton)
-        nextButton.topAnchor == view.topAnchor + 50
-        nextButton.horizontalAnchors == view.horizontalAnchors + 100
-        nextButton.heightAnchor == 50
         nextButton.spacing = 2
+        nextButton.heightAnchor == 50
         nextButton.isUnderlined = true
+        
+        title = "Repository search"
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.searchController = searchController
+        
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        nextButton.setTitle("new view", for: .normal)
+    }
+    
+    override func setupInteraction() {
         nextButton.addTarget(self, action: #selector(showSecond), for: .touchUpInside)
     }
 }

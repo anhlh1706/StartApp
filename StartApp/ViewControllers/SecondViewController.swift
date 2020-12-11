@@ -9,23 +9,31 @@
 import UIKit
 import Anchorage
 
-final class SecondViewController: UIViewController {
+final class SecondViewController: ViewController {
 
     let tableView = UITableView(frame: .zero, style: .plain)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Second view"
         
+    }
+    
+    override func setupView() {
         view.addSubview(tableView)
         tableView.edgeAnchors == view.edgeAnchors
+        
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(cell: OutlinedButtonTableCell.self)
         tableView.register(cell: ContainedButtonTableCell.self)
         tableView.register(cell: TextButtonTableCell.self)
+        
+        title = "Second view"
     }
 
+    override func setupInteraction() {
+        
+    }
 }
 
 // MARK: - Actions
